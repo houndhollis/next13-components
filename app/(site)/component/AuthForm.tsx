@@ -67,21 +67,21 @@ const AuthForm = () => {
           {variant === 'REFISTER' && (
             <Input 
             id='name' 
-            label='Name'
+            label='이름'
             errors={errors} 
             register={register}
             />
           )}
           <Input 
             id='email' 
-            label='Email adress'
+            label='이메일 주소'
             type='email'
             errors={errors} 
             register={register}
           />
            <Input 
             id='password' 
-            label='Password'
+            label='비밀번호'
             type='password'
             errors={errors} 
             register={register}
@@ -103,7 +103,7 @@ const AuthForm = () => {
               <div className="w-full border-t border-gray-300"/>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-2 text-gray-500">Or continue with</span>
+              <span className="bg-white px-2 text-gray-500">3초만에 시작하기</span>
             </div>
           </div>
 
@@ -121,10 +121,10 @@ const AuthForm = () => {
 
         <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
           <div>
-            {variant === 'LOGIN' ? 'New To Messenger?' : 'Alredy have an account?'}
+            {variant === 'LOGIN' ? '처음 이신가요?' : '이미 아이디가 있습니다.'}
           </div>
           <div onClick={toggleVariant} className="underline cursor-pointer" >
-            {variant === 'LOGIN' ? 'Create an account' : 'Login'}
+            {variant === 'LOGIN' ? '회원가입' : '로그인'}
           </div>
         </div>
       </div>
