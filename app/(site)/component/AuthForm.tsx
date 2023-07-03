@@ -2,6 +2,7 @@
 import Button from '@/app/components/Button';
 import Input from '@/app/components/inputs/input';
 import AuthSocialButton from './AuthSocialButton';
+import { BsGithub, BsGoogle } from 'react-Icons/bs';
 
 import React from 'react';
 import { 
@@ -107,13 +108,28 @@ const AuthForm = () => {
           </div>
 
           <div className="mt-6 flex gap-2">
-            <AuthSocialButton/>
+            <AuthSocialButton
+              icon={BsGithub}
+              onClick={() => socialAction('github')}
+            />
+            <AuthSocialButton
+              icon={BsGoogle}
+              onClick={() => socialAction('google')}
+            />
           </div>
+        </div>
 
+        <div className="flex gap-2 justify-center text-sm mt-6 px-2 text-gray-500">
+          <div>
+            {variant === 'LOGIN' ? 'New To Messenger?' : 'Alredy have an account?'}
+          </div>
+          <div onClick={toggleVariant} className="underline cursor-pointer" >
+            {variant === 'LOGIN' ? 'Create an account' : 'Login'}
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export default AuthForm
+export default AuthForm 
