@@ -3,6 +3,7 @@ import Button from '@/app/components/Button';
 import Input from '@/app/components/inputs/input';
 import AuthSocialButton from './AuthSocialButton';
 import { BsGithub, BsGoogle } from 'react-Icons/bs';
+import axios from 'axios';
 
 import React from 'react';
 import { 
@@ -44,7 +45,7 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === 'REFISTER') {
-      // axios Register
+      axios.post('/api/register', data)
     }
 
     if (variant === 'LOGIN') {
