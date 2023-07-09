@@ -3,7 +3,9 @@ import Button from '@/app/components/Button';
 import Input from '@/app/components/inputs/input';
 import AuthSocialButton from './AuthSocialButton';
 import { toast } from 'react-hot-toast';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+// 자동완성으로 router 에서 가져올수 있지만 그거는 이전 버전이다.
 
 import { BsGithub, BsGoogle } from 'react-Icons/bs';
 import axios from 'axios';
@@ -19,8 +21,16 @@ import {
 type Variant = 'LOGIN' | 'REFISTER';
 
 const AuthForm = () => {
+  const session = useSession();
+  const router = useRouter();
   const [variant, setVariant] = React.useState<Variant>('LOGIN');
   const [isLoading, setIsLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    if (session?.status === 'authenticated') {
+      router.push('/users');
+    }
+  },[session?.status, router]);
 
   const toggleVariant = React.useCallback(() => {
     if (variant === 'LOGIN') {
