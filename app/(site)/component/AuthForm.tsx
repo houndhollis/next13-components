@@ -2,6 +2,9 @@
 import Button from '@/app/components/Button';
 import Input from '@/app/components/inputs/input';
 import AuthSocialButton from './AuthSocialButton';
+import { toast } from 'react-hot-toast';
+import { signIn } from 'next-auth/react';
+
 import { BsGithub, BsGoogle } from 'react-Icons/bs';
 import axios from 'axios';
 
@@ -46,15 +49,41 @@ const AuthForm = () => {
 
     if (variant === 'REFISTER') {
       axios.post('/api/register', data)
+      .then(() => toast.success('회원 가입에 성공하였습니다.'))
+      .catch(() => toast.error('실패하였습니다.'))
+      .finally(() => setIsLoading(false));
     }
 
     if (variant === 'LOGIN') {
       // axios signin
+      signIn('credentials', {
+        ...data,
+        redirect: false
+      })
+      .then((result) => {
+        if (!result?.error) {
+          toast.success('로그인 되었습니다.');
+        } 
+        if (result?.error) {
+          toast.error('로그인에 실패하였습니다.');
+        }
+      })
+      .finally(() => setIsLoading(false));
     }
   }
 
-  const socialAction = (aciton: string) => {
+  const socialAction = (action: string) => {
     setIsLoading(true);
+
+    signIn(action, { redirect: false })
+    .then((result) => {
+      if (!result?.error) {
+        toast.success('로그인 되었습니다.');
+      } 
+      if (result?.error) {
+        toast.error('로그인에 실패하였습니다.');
+      }
+    })
     // social
   }
 
