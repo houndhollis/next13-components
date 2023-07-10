@@ -59,7 +59,7 @@ const AuthForm = () => {
 
     if (variant === 'REFISTER') {
       axios.post('/api/register', data)
-      .then(() => toast.success('회원 가입에 성공하였습니다.'))
+      .then(() => signIn('credentials', data))
       .catch(() => toast.error('실패하였습니다.'))
       .finally(() => setIsLoading(false));
     }
@@ -73,6 +73,7 @@ const AuthForm = () => {
       .then((result) => {
         if (!result?.error) {
           toast.success('로그인 되었습니다.');
+          router.push('/users');
         } 
         if (result?.error) {
           toast.error('로그인에 실패하였습니다.');
