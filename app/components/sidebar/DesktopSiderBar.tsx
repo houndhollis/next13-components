@@ -3,12 +3,18 @@
 import React from 'react';
 import useRoutes from '@/app/hooks/useRoutes';
 import DesktopItem from './DesktopItem';
+import { User } from '@prisma/client';
 
-const DesktopSiderBar = () => {
+interface DesktopSiderBarProps {
+  currentUser: User
+}
+
+const DesktopSiderBar:React.FC<DesktopSiderBarProps> = ({
+  currentUser
+}) => {
   const routes = useRoutes();
   const [isOpen, setIsOpen] = React.useState(false);
 
-  
   return (
     <div className="
     hidden 
@@ -39,6 +45,20 @@ const DesktopSiderBar = () => {
               />
             ))}
           </ul>
+        </nav>
+        <nav
+          className="
+            mt-4
+            flex
+            flex-col
+            justify-between
+            items-center
+          "
+        >
+          <div onClick={() => setIsOpen(true)}>
+
+          </div>
+
         </nav>
     </div>
   )
